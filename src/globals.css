@@ -1,0 +1,397 @@
+css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 114 60% 36%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 45 93% 47%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 45 93% 47%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Text Contrast Improvements */
+/* Dark backgrounds (bg-gray-900, bg-gray-800) should have light text */
+.bg-gray-900, .bg-gray-800, [class*="bg-gray-9"], [class*="bg-gray-8"] {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Light/bright backgrounds should have dark text */
+.gold-gradient, .mint-gradient, .green-gradient, .yellow-gradient,
+[class*="from-yellow"], [class*="from-green"], [class*="from-amber"] {
+  color: #000000 !important;
+}
+
+/* Medium backgrounds need good contrast */
+.text-gray-300 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.text-gray-400 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Smooth transitions for all interactive elements */
+.smooth-transitions * {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced glow effects */
+.glow-gold {
+  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.6));
+}
+
+.glow-green {
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.6));
+}
+
+.glow-purple {
+  filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.6));
+}
+
+/* Glass morphism effects */
+.glass-dark {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-dark:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.1);
+}
+
+/* Interactive depth effects */
+.depth-card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.depth-card:hover {
+  transform: translateZ(20px) rotateX(2deg) rotateY(2deg);
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Bright button gradients for maximum visibility */
+.gold-gradient {
+  background: linear-gradient(135deg, #fde047 0%, #facc15 50%, #fbbf24 100%);
+  color: #000000 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.4);
+}
+
+.gold-gradient:hover {
+  background: linear-gradient(135deg, #facc15 0%, #fbbf24 50%, #f59e0b 100%);
+  box-shadow: 0 6px 30px rgba(250, 204, 21, 0.6);
+  transform: translateY(-2px);
+}
+
+.green-gradient {
+  background: linear-gradient(135deg, #6ee7b7 0%, #34d399 50%, #10b981 100%);
+  color: #000000 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(52, 211, 153, 0.4);
+}
+
+.green-gradient:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+  box-shadow: 0 6px 30px rgba(52, 211, 153, 0.6);
+  transform: translateY(-2px);
+}
+
+.mint-gradient {
+  background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 50%, #5eead4 100%);
+  color: #000000 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(110, 231, 183, 0.5);
+}
+
+.mint-gradient:hover {
+  background: linear-gradient(135deg, #6ee7b7 0%, #5eead4 50%, #2dd4bf 100%);
+  box-shadow: 0 6px 30px rgba(110, 231, 183, 0.7);
+  transform: translateY(-2px);
+}
+
+.yellow-gradient {
+  background: linear-gradient(135deg, #fef08a 0%, #fde047 50%, #facc15 100%);
+  color: #000000 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(253, 224, 71, 0.5);
+}
+
+.yellow-gradient:hover {
+  background: linear-gradient(135deg, #fde047 0%, #facc15 50%, #eab308 100%);
+  box-shadow: 0 6px 30px rgba(253, 224, 71, 0.7);
+  transform: translateY(-2px);
+}
+
+.maroon-gradient {
+  background: linear-gradient(135deg, #722f37 0%, #8b3a62 100%);
+}
+
+/* Smooth button interactions */
+button, .btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card hover effects with depth */
+.card-interactive {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-interactive:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(251, 191, 36, 0.3);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+/* Loading skeleton animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #1f2937 0px, #374151 100px, #1f2937 200px);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+/* Parallax elements */
+.parallax {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text glow effects */
+.text-glow-gold {
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.5),
+               0 0 20px rgba(251, 191, 36, 0.3),
+               0 0 30px rgba(251, 191, 36, 0.1);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5),
+               0 0 20px rgba(16, 185, 129, 0.3),
+               0 0 30px rgba(16, 185, 129, 0.1);
+}
+
+/* Interactive input focus */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+}
+
+/* Smooth modal transitions */
+.modal-overlay {
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Badge animations */
+.badge-pulse {
+  animation: badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Floating animation for special elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Ripple effect for clicks */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Smooth page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* GSAP ScrollSmoother Optimization */
+#smooth-wrapper {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#smooth-content {
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize elements with parallax */
+[data-speed],
+[data-lag] {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Prevent flash of unstyled content during scroll initialization */
+.scroll-smooth-init {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-smooth-ready {
+  opacity: 1;
+}
+
+/* Mobile optimization for smooth scroll */
+@media (max-width: 768px) {
+  #smooth-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  #smooth-wrapper,
+  #smooth-content,
+  [data-speed],
+  [data-lag] {
+    will-change: auto !important;
+    transform: none !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
