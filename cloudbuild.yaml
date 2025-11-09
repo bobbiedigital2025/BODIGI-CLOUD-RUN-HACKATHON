@@ -1,0 +1,21 @@
+steps:
+  - name: 'node:18'
+    entrypoint: 'npm'
+    args: ['ci']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      ['build','-t','us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:$SHORT_SHA','-t','us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:latest','.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push','us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:$SHORT_SHA']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push','us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:latest']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      ['run','deploy','bodigi-frontend','--image=us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:$SHORT_SHA','--region=us-east5','--platform=managed','--allow-unauthenticated','--port=8080']
+images:
+  - 'us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:$SHORT_SHA'
