@@ -5,17 +5,17 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
-      ['build','-t','us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:$SHORT_SHA','-t','us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:latest','.']
+      ['build','-t','us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:$SHORT_SHA','-t','us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:latest','.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push','us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:$SHORT_SHA']
+    args: ['push','us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:$SHORT_SHA']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push','us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:latest']
+    args: ['push','us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:latest']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args:
-      ['run','deploy','bodigi-frontend','--image=us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:$SHORT_SHA','--region=us-east5','--platform=managed','--allow-unauthenticated','--port=8080']
+      ['run','deploy','BoDiGi','--image=us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:$SHORT_SHA','--region=us-east5','--platform=managed','--allow-unauthenticated','--port=8080']
 images:
-  - 'us-east5-docker.pkg.dev/$PROJECT_ID/bodigi-images/bodigi-frontend:$SHORT_SHA'
+  - 'us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:$SHORT_SHA'
