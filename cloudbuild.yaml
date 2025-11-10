@@ -1,21 +1,42 @@
 steps:
+  # 1️⃣ Install dependencies
   - name: 'node:18'
     entrypoint: 'npm'
     args: ['ci']
 
+  # 2️⃣ Build the app
+  - name: 'node:18'
+    entrypoint: 'npm'
+    args: ['run', 'build']
+
+  # 3️⃣ Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args:
-      ['build','-t','us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:$SHORT_SHA','-t','us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:latest','.']
+      [
+        'build',
+        '-t',
+        'us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/bodigi:latest',
+        '.'
+      ]
 
+  # 4️⃣ Push image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push','us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:$SHORT_SHA']
+    args: ['push', 'us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/bodigi:latest']
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push','us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:latest']
-
+  # 5️⃣ Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args:
-      ['run','deploy','BoDiGi','--image=us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:$SHORT_SHA','--region=us-east5','--platform=managed','--allow-unauthenticated','--port=8080']
+      [
+        'run',
+        'deploy',
+        'bodigi',
+        '--image=us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/bodigi:latest',
+        '--region=us-east5',
+        '--platform=managed',
+        '--allow-unauthenticated',
+        '--port=8080'
+      ]
+
 images:
-  - 'us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/BoDiGi:$SHORT_SHA'
+  - 'us-east5-docker.pkg.dev/bodigi-477210/bodigi-images/bodigi:latest'

@@ -1,0 +1,4 @@
+constraint: constraints/run.allowedIngress
+listPolicy:
+  allowedValues:
+  - all

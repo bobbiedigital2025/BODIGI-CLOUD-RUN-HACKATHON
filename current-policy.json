@@ -1,0 +1,20 @@
+{
+  "bindings": [
+    {
+      "role": "roles/run.invoker",
+      "members": [
+        "allUsers",
+        "domain:bodigi-digital.com",
+        "user:support@bodigi-digital.com"
+      ]
+    },
+    {
+      "role": "roles/run.admin",
+      "members": [
+        "user:support@bodigi-digital.com"
+      ]
+    }
+  ],
+  "etag": "BwZDNkzktSI=",
+  "version": 1
+}
